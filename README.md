@@ -1,34 +1,30 @@
-🏥 MediRAG – Multi-Agent AI Medical Report Analyzer
+# 🏥 MediRAG – Multi-Agent AI Medical Report Analyzer
 
-MediRAG is an AI-powered system that analyzes medical reports, lab results, and prescriptions using Document AI, Multi-Agent Systems, Retrieval-Augmented Generation (RAG), and LLM reasoning.
+**MediRAG** is an AI-powered system designed to analyze **medical reports, prescriptions, and lab test results** using **Document AI, Multi-Agent Systems, Retrieval-Augmented Generation (RAG), and Large Language Models (LLMs)**.
 
-Users can upload:
+The system automatically extracts medical data, evaluates laboratory values, and generates **simple, human-readable explanations** to help users understand their medical reports.
 
-📄 PDF medical reports
+---
 
-🖼️ Scanned image reports
+# 🚀 Key Features
 
-💊 Doctor prescriptions
+✔ **Document AI Processing** – Supports PDF reports and scanned image documents
+✔ **OCR Integration** – Extracts text from scanned reports using Tesseract
+✔ **Multi-Agent Workflow** – Modular AI agents handle different analysis tasks
+✔ **Medical Entity Extraction** – Detects lab test values and medical parameters
+✔ **Patient Information Extraction** – Identifies patient details from reports
+✔ **Automated Medical Analysis** – Compares results with normal medical ranges
+✔ **AI-Generated Explanations** – Provides simplified health insights using LLMs
+✔ **Vector Database Storage** – Stores processed reports for future retrieval
+✔ **Report ID System** – Allows users to retrieve previously analyzed reports
 
-🧪 Lab test results
+---
 
-The system automatically extracts medical values, analyzes them, and explains the report in simple language.
+# 🧠 System Architecture
 
-🚀 Features
+MediRAG uses a **multi-agent pipeline built with LangGraph** to process medical reports step by step.
 
-✔ Document AI (PDF + OCR support)
-✔ Multi-Agent workflow
-✔ Medical entity extraction
-✔ Patient information extraction
-✔ Automated medical analysis
-✔ AI-generated health explanations
-✔ Vector database storage
-✔ Report retrieval using Report ID
-
-🧠 System Architecture
-
-The system uses a multi-agent pipeline built with LangGraph.
-
+```
 User Uploads Medical Report
         │
         ▼
@@ -39,186 +35,254 @@ Document Reader
 Agent 1 → File Classifier
         │
         ▼
-Agent 2 → Medical Entity Extractor
+Agent 2 → Medical Entity Extraction
         │
         ▼
-Agent 3 → Patient Info Extractor
+Agent 3 → Patient Information Extraction
         │
         ▼
-Agent 4 → Medical Analysis Agent
+Agent 4 → Medical Analysis
         │
         ▼
-Agent 5 → Response Generator
+Agent 5 → Response Generation
         │
         ▼
 Vector Database Storage
         │
         ▼
 User Receives Medical Explanation
-📂 Project Structure
+```
+
+---
+
+# 📂 Project Structure
+
+```
 medirag-ai/
 │
-├── agents/
+├── agents/                # AI agents for different tasks
 │   ├── classifier_agent.py
 │   ├── entity_extractor_agent.py
 │   ├── patient_info_agent.py
 │   ├── analysis_agent.py
 │   └── response_agent.py
 │
-├── rag/
+├── rag/                   # Retrieval-Augmented Generation components
 │   ├── embedding_model.py
 │   ├── vector_store.py
 │   └── retrieval_agent.py
 │
-├── utils/
+├── utils/                 # Utility modules
 │   ├── pdf_reader.py
 │   ├── ocr_reader.py
 │   └── report_id_generator.py
 │
-├── workflows/
+├── workflows/             # Multi-agent workflow orchestration
 │   └── medical_workflow.py
 │
-├── config/
+├── config/                # Configuration settings
 │   └── settings.py
 │
 ├── database/
-│   └── chroma_db/
+│   └── chroma_db/         # Vector database storage
 │
-├── app.py
-├── requirements.txt
-├── .env
+├── app.py                 # Application entry point
+├── requirements.txt       # Project dependencies
+├── .env                   # Environment variables (API keys)
 └── README.md
-🧰 Technology Stack
-Backend
+```
 
-Python
+---
 
-FastAPI / Streamlit
+# 🧰 Technology Stack
 
-Multi-Agent System
+### Backend
 
-LangGraph
+* Python
+* FastAPI / Streamlit
 
-LLM
+### Multi-Agent Framework
 
-Groq
+* LangGraph
 
-Llama 3 / Mixtral models
+### Large Language Models
 
-Document Processing
+* Groq API
+* Llama 3 / Mixtral models
 
-PyPDF
+### Document Processing
 
-OCR using Tesseract
+* PyPDF
+* Tesseract OCR
 
-Embeddings
+### Embeddings
 
-Sentence Transformers
+* Sentence Transformers
 
-Vector Database
+### Vector Database
 
-ChromaDB
+* ChromaDB
 
-⚙️ Installation
-1️⃣ Clone the Repository
+---
+
+# ⚙️ Installation
+
+### 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/yourusername/medirag-ai.git
-
 cd medirag-ai
-2️⃣ Create Virtual Environment
+```
+
+---
+
+### 2️⃣ Create a Virtual Environment
+
+```bash
 python -m venv venv
+```
 
-Activate it:
+Activate the environment:
 
-Windows
+**Windows**
 
+```
 venv\Scripts\activate
+```
 
-Mac/Linux
+**Mac / Linux**
 
+```
 source venv/bin/activate
-3️⃣ Install Dependencies
+```
+
+---
+
+### 3️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
-4️⃣ Add API Key
+```
 
-Create .env file
+---
 
+### 4️⃣ Add API Key
+
+Create a `.env` file in the project root.
+
+```
 GROQ_API_KEY=your_api_key_here
-▶ Running the Application
+```
+
+---
+
+# ▶ Running the Application
 
 Run the Streamlit application:
 
+```
 streamlit run app.py
+```
 
-Open browser:
+Open in your browser:
 
+```
 http://localhost:8501
-📄 Example Medical Values Extracted
+```
 
-Example output:
+---
 
+# 📄 Example Extracted Medical Values
+
+Example structured output from a report:
+
+```json
 {
  "hemoglobin": 10.5,
  "blood_sugar": 113,
  "platelets": 205000,
  "cholesterol": 194
 }
-📊 Medical Analysis Example
+```
+
+---
+
+# 📊 Example Medical Analysis
+
+```
 Hemoglobin → Low (Possible anemia)
 
-Blood Sugar → Slightly High
+Blood Sugar → Slightly elevated
 
 Cholesterol → Near upper limit
-🔑 Report ID Storage
+```
 
-After analysis, each report is stored in the vector database.
+The system analyzes lab values against standard medical ranges and provides simplified explanations.
+
+---
+
+# 🔑 Report ID Storage
+
+Each processed report is stored in the vector database with a **unique report identifier**.
 
 Example:
 
+```
 Report ID: MED-a73b9f21
+```
 
-Users can later retrieve their report using this ID.
+Users can retrieve previously analyzed reports using this ID.
 
-🔍 Retrieval Using RAG
+---
 
-Using Retrieval-Augmented Generation, the system can answer questions like:
+# 🔍 Retrieval Using RAG
 
-What does my hemoglobin level mean?
+The system supports **Retrieval-Augmented Generation (RAG)** to answer user questions about their medical report.
 
-The AI retrieves the stored report and explains it.
+Example query:
 
-⚠ Medical Disclaimer
+```
+What does my hemoglobin level indicate?
+```
 
-This system is intended for educational and informational purposes only.
+The AI retrieves the stored report data and generates an explanation.
 
-It does not replace professional medical advice.
+---
+
+# ⚠ Medical Disclaimer
+
+This project is intended **only for educational and informational purposes**.
+
+It does **not replace professional medical advice**.
 Users should always consult a qualified healthcare professional for diagnosis and treatment.
 
-📈 Future Improvements
+---
 
-Planned upgrades:
+# 📈 Future Improvements
 
-Prescription understanding agent
+Planned enhancements include:
 
-Chat with medical reports
+• Prescription understanding agent
+• Chat interface for interacting with medical reports
+• Integration with medical knowledge bases (WHO / clinical guidelines)
+• Cloud deployment for public access
+• Doctor recommendation system
 
-Medical knowledge RAG (WHO guidelines)
+---
 
-Deployment to cloud
+# 👨‍💻 Author
 
-Doctor recommendation system
-
-👨‍💻 Author
-
-Uppala Venkata Satya Srinivas
-
+**Uppala Venkata Satya Srinivas**
 Data Science & AI Enthusiast
 
-Portfolio
+🌐 Portfolio
 https://srinuuppala.netlify.app/
 
-LinkedIn
+🔗 LinkedIn
 https://www.linkedin.com/in/srinuuppala/
 
-⭐ If this project helped you
+---
 
-Please ⭐ star the repository on GitHub.
+# ⭐ Support the Project
+
+If you found this project useful, please consider **starring the repository** ⭐ on GitHub.

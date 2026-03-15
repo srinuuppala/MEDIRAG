@@ -1,7 +1,7 @@
 import chromadb
 from rag.embedding_model import get_embedding_model, encode
 
-client = chromadb.PersistentClient(path="./chroma_db")
+client = chromadb.PersistentClient(path="./chroma_db", settings=chromadb.Settings(allow_reset=True))
 collection = client.get_or_create_collection("medical_reports")
 
 def store_report(report_id: str, content: str, metadata: dict = None):

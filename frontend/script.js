@@ -108,12 +108,12 @@ function renderSimpleResults(data) {
     `;
     resultsGrid.appendChild(valuesCard);
     
-    // Analysis
+    // Analysis - Now human readable
     const analysisCard = document.createElement('div');
     analysisCard.className = 'card analysis-card';
     analysisCard.innerHTML = `
         <h3><i class="fas fa-chart-line"></i> Analysis</h3>
-        <div id="analysis">${JSON.stringify(data.analysis || {}, null, 2)}</div>
+        <div id="analysis" class="analysis-container">${renderAnalysis(data.analysis || {})}</div>
     `;
     resultsGrid.appendChild(analysisCard);
     
@@ -162,7 +162,7 @@ async function handleLookup() {
             <div class="card full">
                 <h3>🔍 Retrieved Report: ${data.report_id}</h3>
                 ${data.status === 'success' ? 
-                    `<pre>${JSON.stringify(data.data, null, 2)}</pre>` :
+                    `<div class="retrieved-data">${renderAnalysis(data.data || {})}</div>` :
                     `<p style="color: red;">${data.message}</p>`
                 }
             </div>
@@ -187,7 +187,41 @@ function hideError() {
     errorDiv.style.display = 'none';
 }
 
+function renderAnalysis(analysis) {
+  if (!analysis || typeof analysis !== 'object') {
+    return '<p>No analysis available</p>';
+  }
+  
+  let html = '';
+  for (const [key, value] of Object.entries(analysis)) {
+    const formattedKey = key.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    html += `
+      <div class="analysis-section" style="margin-bottom: 16px; padding: 12px; border-left: 4px solid #3b82f6;">
+        <h4 style="color: #2563eb; margin-bottom: 8px; font-size: 1.1em;">${formattedKey}</h4>
+        <div class="analysis-content">${formatValue(value)}</div>
+      </div>
+    `;
+  }
+  return html || '<p>No analysis data</p>';
+}
+
+function formatValue(value) {
+  if (value === null || value === undefined) return 'N/A';
+  if (typeof value === 'object') {
+    if (Array.isArray(value)) {
+      return `<ul style="margin-left: 20px;">${value.map(item => `<li>${formatValue(item)}</li>`).join('')}</ul>`;
+    }
+    // Pretty nested JSON in expandable details
+    return `<details style="margin: 5px 0;">
+      <summary style="cursor: pointer; color: #64748b; font-weight: 500; padding: 4px 0;">👁️ View Details (${Object.keys(value).length} fields)</summary>
+      <pre style="background: #f8f9fa; padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 0.85em; margin: 5px 0; border: 1px solid #e2e8f0;">${JSON.stringify(value, null, 2)}</pre>
+    </details>`;
+  }
+  return String(value).replace(/\n/g, '<br>').replace(/ {2,}/g, str => '&nbsp;'.repeat(str.length));
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     document.body.style.opacity = '1';
 });
+

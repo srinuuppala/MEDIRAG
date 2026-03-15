@@ -276,7 +276,7 @@ Planned enhancements include:
 Data Science & AI Enthusiast
 
 🌐 Portfolio
-https://srinuuppala.netlify.app/
+https://uppalasrinu.vercel.app/
 
 🔗 LinkedIn
 https://www.linkedin.com/in/srinuuppala/

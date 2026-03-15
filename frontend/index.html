@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediRAG - AI Medical Report Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-heartbeat"></i> MediRAG</h1>
+            <p>AI-Powered Medical Document Analysis & Smart Recommendations</p>
+        </header>
+
+        <!-- Upload Section -->
+        <section id="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon"><i class="fas fa-file-medical"></i></div>
+                <p>Drag & drop <strong>PDF/Image</strong> or <label for="fileInput" class="click-here">click to upload</label></p>
+                <small>Supports medical reports, prescriptions, lab results</small>
+                <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.tiff" hidden>
+                <button id="analyzeBtn" disabled><i class="fas fa-magnifying-glass"></i> Analyze Report</button>
+            </div>
+            <div class="progress-bar" id="progressBar" hidden>
+                <div class="progress"></div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" hidden>
+            <div class="report-id">
+                <strong><i class="fas fa-id-badge"></i> Report ID:</strong> 
+                <span id="reportId"></span>
+                <button id="copyId"><i class="fas fa-copy"></i> Copy ID</button>
+                <button id="savePdf" style="display:none;"><i class="fas fa-download"></i> Download PDF</button>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Dynamic content -->
+            </div>
+        </section>
+
+        <!-- Lookup Section -->
+        <section class="lookup-section" id="lookup-section">
+            <h2><i class="fas fa-search"></i> Retrieve Past Analysis</h2>
+            <div class="lookup-input-group">
+                <input type="text" id="lookupId" placeholder="Enter Report ID (e.g., ABC12345)" maxlength="8">
+                <button id="lookupBtn"><i class="fas fa-magnifying-glass"></i> Retrieve</button>
+            </div>
+            <div id="lookupResults"></div>
+        </section>
+
+        <div id="error" class="error"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

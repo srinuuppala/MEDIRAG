@@ -1,0 +1,13 @@
+langchain
+langgraph
+langchain-groq
+groq
+chromadb
+sentence-transformers
+pypdf
+pytesseract
+Pillow
+streamlit
+fastapi
+uvicorn
+python-dotenv
